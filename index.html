@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-       * {
+    * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -15,7 +15,7 @@
 }
 #v-player{
   font-family: 'Poppins', sans-serif;
-  max-width:560px;
+  max-width:660px;
   margin:20px auto;
 }
 #podcast-player{
@@ -44,7 +44,7 @@
 }
 #podcast-player .episode-title{
   margin:10px 0 20px;
-  font-size:20px;
+  font-size:15px;
   line-height:1.2;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -265,28 +265,48 @@
     padding:10px 0;
   }
 }
+input[type=text] {
+  color: #879EB5;
+    font-size: 14px;
+  // Capitalized to prevent Sass
+  // thinking it's the Sass max()
+  font-size: Max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  transition: 180ms box-shadow ease-in-out;
+}
+button {
+  background-color: #eee;
+  color: #333366;
+  font-size: 14px;
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  border: 1px solid #879EB5;
+  border-radius: 4px;
+  transition: 180ms box-shadow ease-in-out;
+}
+#inputDiv { padding-bottom : 10px; }
     </style>
 </head>
 <body>
-    <!--div class="container">
-        <h2>Estrattore della Mattina <a href="https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc" target="_blank"><img src="https://lh3.googleusercontent.com/MUxpHBm6Fg_X5OQGXkYZh8tFZ9lf7-2Pd0LTF9GLbNXhSxUySdVygnzEEyAljINEqvP0phWdrtF0cTQJo7EIlhN9aA=s60" width="25" height="25"></a></h2>
-        <input type="text" id="urlInput" placeholder="Enter URL">
-        <button onclick="extractTagSrc()">Estrai</button>
-        <div class="result" id="result"></div>
-    </div-->
-    <div id="v-player">
+  <div id="v-player">
 <audio id="audio-track" src="https://api.podcache.net/episodes/698d602a-a059-45dc-b42c-a2bdfde19922/stream.mp3" type="audio/mpeg" preload="metadata">
 </audio>
-  <div id="div_1" style="display:none">
-	https://api.podcache.net/episodes/698d602a-a059-45dc-b42c-a2bdfde19922/stream.mp3
-</div>
+  <div id="div_1" style="display:none"></div>
+  <div id="inputDiv">
+    <input type="text" size="60" id="urlInput" placeholder="Inserisci URL">
+    <button id="btnEstrai" onclick="extractTagSrc()">Estrai</button>
+    <a href="https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc" target="_blank"><img src="https://lh3.googleusercontent.com/MUxpHBm6Fg_X5OQGXkYZh8tFZ9lf7-2Pd0LTF9GLbNXhSxUySdVygnzEEyAljINEqvP0phWdrtF0cTQJo7EIlhN9aA=s60" width="25" height="25" valign="bottom" align="right"></a>
+  </div>
   <div id="podcast-player">
     <div class="epidode-header">
        <p>Estrattore della Mattina</p>
        
       <a class="episode-download" name="copy_pre" href="#" id="div_1"><i class="fa-regular fa-copy"></i></a>
     </div>
-    <h3 class="episode-title">Manish Chandra, Founder & CEO of Poshmark, EWMBA ’95</h3>
+    <h3 class="episode-title" id="txtTitle"></h3>
     <div class="wave">
       <svg  xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 299 35">
 <linearGradient id="PSgrad_0" x1="70.711%" x2="0%" y1="70.711%" y2="0%">
@@ -315,135 +335,140 @@
     </div>
   </div>
 </div>
-    <script>
-        var audioTrack = document.getElementById("audio-track");
-var playButton = $("#play");
-var pauseButton = $("#pause");
-var prev_15 = $("#prev-15");
-var next_30 = $("#next-30");
-var fillBar = $(".fill-bar");
-var speed = $("#speed");
-var waving = $(".wave svg path");
-
-playButton.click(function() {
-  pauseButton.fadeIn();
-  playButton.hide();
-  audioTrack.play();
-  waving.css({"animation-name": "morph" });
-});
-
-pauseButton.click(function() {
-  playButton.fadeIn();
-  pauseButton.hide();
-  audioTrack.pause();
-  waving.css({"animation-name": "none" });
-});
-
-prev_15.click(function() {
-  audioTrack.currentTime = audioTrack.currentTime - 15;
-  if(audioTrack.currentTime < 0 ) audioTrack.currentTime = 0;
-});
-
-next_30.click(function() {
-  audioTrack.currentTime = audioTrack.currentTime + 30;
-});
-
-speed.click(function() {
-  var currentspeed = parseFloat(speed.attr("data-speed"));
-  if (currentspeed >= 2) { currentspeed = 0.75;}
-  else { currentspeed =  currentspeed + 0.25; }
-  audioTrack.playbackRate = currentspeed;
-  speed.attr("data-speed", currentspeed);
-  speed.html(currentspeed + 'x');
-});
-
- $("#seek").on("change", function() {
-     audioTrack.currentTime = $(this).val();               
- });
-
-audioTrack.addEventListener("loadedmetadata", function() {     
-  var timeStamps = parseTime();
-    $(".time.current").html(timeStamps[0]);
-    $(".time.till-end").html(timeStamps[2]);
-});
-
-audioTrack.addEventListener("timeupdate", function () {
-    var position = (100 / audioTrack.duration) * audioTrack.currentTime;
-    fillBar.css("width", position + "%");
-  
-    var timeStamps = parseTime();
-    $(".time.current").html(timeStamps[0]);
-    $(".time.till-end").html(timeStamps[1]);
-  
-    $("#seek").attr("max", audioTrack.duration);
-    $('#seek').val(audioTrack.currentTime);
-  });
-
-function parseTime() {
-    var current = audioTrack.currentTime;
-    var duration = audioTrack.duration;
-    var tillend = audioTrack.duration - audioTrack.currentTime; 
-    var durationMinute = Math.floor(duration / 60);
-    var durationSecond = Math.floor(duration - durationMinute * 60);
-    var durationLabel = durationMinute + ":" + durationSecond;
-    var tillendMinute = Math.floor(tillend / 60);
-    var tillendSecond = Math.floor(tillend - tillendMinute * 60);
-    if (tillendSecond  < 10) {
-      tillendSecond  = "0" + tillendSecond;
-    }
-    var tillendLabel = "-" + tillendMinute + ":" + tillendSecond;
-    currentSecond = Math.floor(current);
-    currentMinute = Math.floor(currentSecond / 60);
-    currentSecond = currentSecond - currentMinute * 60;
-    if (currentSecond < 10) {
-      currentSecond = "0" + currentSecond;
-    }
-    var currentLabel = currentMinute + ":" + currentSecond;
-    return [currentLabel, tillendLabel, durationLabel];
-}
-
-$(document).ready(function(){
-	$("a[name=copy_pre]").click(function() {
-		var id = $(this).attr('id');
-		var el = document.getElementById(id);
-    el.style.display='block';
-		var range = document.createRange();
-		range.selectNodeContents(el);
-		var sel = window.getSelection();
-		sel.removeAllRanges();
-		sel.addRange(range);
-		document.execCommand('copy');
-    el.style.display='none';
-		alert("Contents copied to clipboard.");
-		return false;
-	});
-});
-    </script>
-    <!--script>
-        async function extractTagSrc() {
-            const url = document.getElementById('urlInput').value;
-            const resultDiv = document.getElementById('result');
-
-             try {
-                const response = await fetch(url);
-                const text = await response.text();
-                //console.log(text);
-                const nd_pos2 = text.search('.mp3');
-                const nd_pos1 = text.search('episode_raw_url');
-                const subs = text.substring(nd_pos1, nd_pos2);
-                //console.log(nd_pos1);
-                //console.log(nd_pos2);
-                //console.log(subs);
-                const nd_posEnd = subs.lastIndexOf('"');
-                //console.log(nd_posEnd);
-                const subsFinale = subs.substring(18);
-                //console.log(subsFinale);
-                resultDiv.innerHTML = `Link estratto: <a href="` + subsFinale + `.mp3" target="_blank">LINK</a>`;
-                
-            } catch (error) {
-                
-            }
-        }
-</script-->
+	<script>
+		var audioTrack = document.getElementById("audio-track");
+		var playButton = $("#play");
+		var pauseButton = $("#pause");
+		var prev_15 = $("#prev-15");
+		var next_30 = $("#next-30");
+		var fillBar = $(".fill-bar");
+		var speed = $("#speed");
+		var waving = $(".wave svg path");
+		
+		playButton.click(function() {
+		  pauseButton.fadeIn();
+		  playButton.hide();
+		  audioTrack.play();
+		  waving.css({"animation-name": "morph" });
+		});
+		
+		pauseButton.click(function() {
+		  playButton.fadeIn();
+		  pauseButton.hide();
+		  audioTrack.pause();
+		  waving.css({"animation-name": "none" });
+		});
+		
+		prev_15.click(function() {
+		  audioTrack.currentTime = audioTrack.currentTime - 15;
+		  if(audioTrack.currentTime < 0 ) audioTrack.currentTime = 0;
+		});
+		
+		next_30.click(function() {
+		  audioTrack.currentTime = audioTrack.currentTime + 30;
+		});
+		
+		speed.click(function() {
+		  var currentspeed = parseFloat(speed.attr("data-speed"));
+		  if (currentspeed >= 2) { currentspeed = 0.75;}
+		  else { currentspeed =  currentspeed + 0.25; }
+		  audioTrack.playbackRate = currentspeed;
+		  speed.attr("data-speed", currentspeed);
+		  speed.html(currentspeed + 'x');
+		});
+		
+		 $("#seek").on("change", function() {
+		     audioTrack.currentTime = $(this).val();               
+		 });
+		
+		audioTrack.addEventListener("loadedmetadata", function() {     
+		  var timeStamps = parseTime();
+		    $(".time.current").html(timeStamps[0]);
+		    $(".time.till-end").html(timeStamps[2]);
+		});
+		
+		audioTrack.addEventListener("timeupdate", function () {
+		    var position = (100 / audioTrack.duration) * audioTrack.currentTime;
+		    fillBar.css("width", position + "%");
+		  
+		    var timeStamps = parseTime();
+		    $(".time.current").html(timeStamps[0]);
+		    $(".time.till-end").html(timeStamps[1]);
+		  
+		    $("#seek").attr("max", audioTrack.duration);
+		    $('#seek').val(audioTrack.currentTime);
+		  });
+		
+		function parseTime() {
+		    var current = audioTrack.currentTime;
+		    var duration = audioTrack.duration;
+		    var tillend = audioTrack.duration - audioTrack.currentTime; 
+		    var durationMinute = Math.floor(duration / 60);
+		    var durationSecond = Math.floor(duration - durationMinute * 60);
+		    var durationLabel = durationMinute + ":" + durationSecond;
+		    var tillendMinute = Math.floor(tillend / 60);
+		    var tillendSecond = Math.floor(tillend - tillendMinute * 60);
+		    if (tillendSecond  < 10) {
+		      tillendSecond  = "0" + tillendSecond;
+		    }
+		    var tillendLabel = "-" + tillendMinute + ":" + tillendSecond;
+		    currentSecond = Math.floor(current);
+		    currentMinute = Math.floor(currentSecond / 60);
+		    currentSecond = currentSecond - currentMinute * 60;
+		    if (currentSecond < 10) {
+		      currentSecond = "0" + currentSecond;
+		    }
+		    var currentLabel = currentMinute + ":" + currentSecond;
+		    return [currentLabel, tillendLabel, durationLabel];
+		}
+		
+		$(document).ready(function(){
+			$("a[name=copy_pre]").click(function() {
+				var id = $(this).attr('id');
+				var el = document.getElementById(id);
+		    el.style.display='block';
+				var range = document.createRange();
+				range.selectNodeContents(el);
+				var sel = window.getSelection();
+				sel.removeAllRanges();
+				sel.addRange(range);
+				document.execCommand('copy');
+		    el.style.display='none';
+				alert("Contents copied to clipboard.");
+				return false;
+			});
+		});
+		async function extractTagSrc() {
+			const url = document.getElementById('urlInput').value;
+		        const resultDiv = document.getElementById('result');
+			       try {
+		                if (url != "") {
+		                  const response = await fetch(url);
+		                  const text = await response.text(); 
+		                  const nd_pos2 = text.search('.mp3');
+		                  const nd_pos1 = text.search('episode_raw_url');
+		                  const ttl1 = text.search('title>');
+		                  const ttl2 = text.search('</title>');
+		                  const subs = text.substring(nd_pos1, nd_pos2);
+		                  console.log(ttl1);
+		                  console.log(ttl2);
+		                  //console.log(subs);
+		                  const nd_posEnd = subs.lastIndexOf('"');
+		                  //console.log(nd_posEnd);
+		                  const subsFinale = subs.substring(18);
+		                  //console.log(subsFinale);
+		                  audioTrack.src = subsFinale +  `.mp3`;
+		                  document.getElementById('div_1').innerHTML= subsFinale + `.mp3`;
+		                  //resultDiv.innerHTML = `Link estratto: <a href="` + subsFinale + `.mp3" target="_blank">LINK</a>`;
+		                 const titleOk = text.substring((ttl1+6), (ttl2-10));
+		                 document.getElementById('txtTitle').innerHTML = titleOk;
+		                 document.getElementById('urlInput').value= "";
+		                 console.log(titleOk);
+		                }
+		            } catch (error) {
+		                
+		            }
+		        }
+	</script>
 </body>
 </html>

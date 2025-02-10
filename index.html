@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrattore della Mattina</title>
+    <title>Estrattore dei Podcast</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
@@ -462,8 +462,8 @@ button {
 		                  const ttl1 = text.search('title>');
 		                  const ttl2 = text.search('</title>');
 		                  const subs = text.substring(nd_pos1, nd_pos2);
-		                  console.log(ttl1);
-		                  console.log(ttl2);
+		                  //console.log(ttl1);
+		                  //console.log(ttl2);
 		                  //console.log(subs);
 		                  const nd_posEnd = subs.lastIndexOf('"');
 		                  //console.log(nd_posEnd);
@@ -483,14 +483,15 @@ button {
 		            }
 		        }
 		$(function () {
-  			$('#emailLink').on('click', function (event) {
-		      	event.preventDefault();
-			alert("Preparazione Mail");
-			var email = 'inidrizzo@gmail.com';
-			var subject = 'Podcast: '+ varTitleOk;
-			var emailBody = 'Some blah';
-			window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
-			});
+		  $('#emailLink').on('click', function (event) {
+		      event.preventDefault();
+		    alert("Preparazione Mail");
+		    var email = 'inidrizzo@gmail.com';
+		    var subject = 'Podcast: '+ varTitleOk;
+		    var emailBody = $('#audio-track').attr('src');
+		    //alert($('#audio-track').attr('src'));
+		    window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
+		  });
 		});
 	</script>
 </body>

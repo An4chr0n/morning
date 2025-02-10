@@ -501,7 +501,7 @@ button {
 		    var subject = 'Podcast: '+ varTitleOk;
 		    var emailBody = $('#audio-track').attr('src');
 		    //alert($('#audio-track').attr('src'));
-		    window.location = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + emailBody;
+		    window.location = '<a href="https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + emailBody + '" target="_blank">Link Episodio</a>';
 		  });
 		});
 	</script>

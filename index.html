@@ -314,9 +314,10 @@ button {
     <div class="epidode-header">
        <p>Estrattore dei Podcast</p>
       	<div align:right;">
-       		<a class="episode-download" href="#" id="emailLink" name="emailLink"><i class="fa-regular fa-envelope"></i></a>
+       		<a class="episode-download" href="#" id="emailLinkG" name="emailLinkG"><i class="fa-brands fa-google"></i></a>
+      		<a class="episode-download" href="#" id="emailLink" name="emailLink"><i class="fa-regular fa-envelope" style="margin-left:20px;"></i></a>
       		<a class="episode-download" name="copy_pre" href="#" id="div_1"><i class="fa-regular fa-copy" style="margin-left:20px;"></i></a>
-      	</div>
+      </div>
     </div>
     <h3 class="episode-title" id="txtTitle"></h3>
     <div class="wave">
@@ -491,6 +492,16 @@ button {
 		    var emailBody = $('#audio-track').attr('src');
 		    //alert($('#audio-track').attr('src'));
 		    window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
+		  });
+		});
+		$(function () {
+		  $('#emailLinkG').on('click', function (event) {
+		      event.preventDefault();
+		    var email = 'indirizzo@gmail.com';
+		    var subject = 'Podcast: '+ varTitleOk;
+		    var emailBody = $('#audio-track').attr('src');
+		    //alert($('#audio-track').attr('src'));
+		    window.location = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + emailBody;
 		  });
 		});
 	</script>

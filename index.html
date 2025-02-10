@@ -505,7 +505,7 @@ button {
 		$(function () {
 			$('#emailLink').on('click', function (event) {
 				event.preventDefault();
-				var email = 'inidrizzo@gmail.com';
+				var email = emailAddress;
 				var subject = 'Podcast: '+ varTitleOk;
 				var emailBody = $('#audio-track').attr('src');
 				//alert($('#audio-track').attr('src'));
@@ -515,7 +515,6 @@ button {
 				} else {alert("Inserisci un indirizzo email valido.");
 					$('#mailInput').val("");
 				       }
-				$('#mailInput').val("");
 			});
 		});
 		$(function () {
@@ -532,7 +531,6 @@ button {
 				} else {alert("Inserisci un indirizzo email valido.");
 				       	$('#mailInput').val("");
 				       }
-				$('#mailInput').val("");
 			});
 		});
 	

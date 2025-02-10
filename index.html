@@ -312,9 +312,11 @@ button {
   </div>
   <div id="podcast-player">
     <div class="epidode-header">
-       <p>Estrattore della Mattina</p>
-       
-      <a class="episode-download" name="copy_pre" href="#" id="div_1"><i class="fa-regular fa-copy"></i></a>
+       <p>Estrattore dei Podcast</p>
+      	<div align:right;">
+       		<a class="episode-download" href="#" id="emailLink" name="emailLink"><i class="fa-regular fa-envelope"></i></a>
+      		<a class="episode-download" name="copy_pre" href="#" id="div_1"><i class="fa-regular fa-copy" style="margin-left:20px;"></i></a>
+      	</div>
     </div>
     <h3 class="episode-title" id="txtTitle"></h3>
     <div class="wave">
@@ -354,7 +356,7 @@ button {
 		var fillBar = $(".fill-bar");
 		var speed = $("#speed");
 		var waving = $(".wave svg path");
-		
+		var varTitleOk = "";
 		playButton.click(function() {
 		  pauseButton.fadeIn();
 		  playButton.hide();
@@ -471,14 +473,25 @@ button {
 		                  document.getElementById('div_1').innerHTML= subsFinale + `.mp3`;
 		                  //resultDiv.innerHTML = `Link estratto: <a href="` + subsFinale + `.mp3" target="_blank">LINK</a>`;
 		                 const titleOk = text.substring((ttl1+6), (ttl2-10));
+				 varTitleOk = titleOk;
 		                 document.getElementById('txtTitle').innerHTML = titleOk;
 		                 document.getElementById('urlInput').value= "";
-		                 console.log(titleOk);
+		                 //console.log(titleOk);
 		                }
 		            } catch (error) {
 		                
 		            }
 		        }
+		$(function () {
+  			$('#emailLink').on('click', function (event) {
+		      	event.preventDefault();
+			alert("Preparazione Mail");
+			var email = 'inidrizzo@gmail.com';
+			var subject = 'Podcast: '+ varTitleOk;
+			var emailBody = 'Some blah';
+			window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
+			});
+		});
 	</script>
 </body>
 </html>

@@ -304,13 +304,15 @@ button {
 			<audio id="audio-track" src="" type="audio/mpeg" preload="metadata">
 			</audio>
 			<div id="div_1" style="display:none"></div>
-			<div id="inputDiv">
-				<input type="text" size="35" id="urlInput" placeholder="Inserisci URL" style="margin-left:5px;">
-				<button id="btnEstrai" onclick="extractTagSrc()">Estrai</button>
-				<a href="https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc" target="_blank">
-					<img src="https://lh3.googleusercontent.com/MUxpHBm6Fg_X5OQGXkYZh8tFZ9lf7-2Pd0LTF9GLbNXhSxUySdVygnzEEyAljINEqvP0phWdrtF0cTQJo7EIlhN9aA=s60" width="25" height="25" valign="bottom" align="right" style="margin-right:5px;">
-				</a>
-			</div>
+			<div id="inputDiv" style="width:100%;">
+		    	<div style="display: flex; justify-content:flex-start;float: left;">
+		    		<input type="text" size="35" id="urlInput" placeholder="Inserisci URL">
+		    		<button id="btnEstrai" onclick="extractTagSrc()" style="margin-left:10px;">Estrai</button>
+		    	</div>
+		    	<div style="display: flex; justify-content:flex-end;">
+		      		<input type="text" size="20" id="mailInput" placeholder="Indirizzo e-mail">
+		    		<a href="https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc" target="_blank"><img src="https://lh3.googleusercontent.com/MUxpHBm6Fg_X5OQGXkYZh8tFZ9lf7-2Pd0LTF9GLbNXhSxUySdVygnzEEyAljINEqvP0phWdrtF0cTQJo7EIlhN9aA=s60" width="25" height="25" valign="bottom" align="right" style="margin-left:10px;"></a></div>
+		  	</div>
 			<div id="podcast-player">
 				<div class="epidode-header">
 					<p>Estrattore dei Podcast</p>
@@ -496,27 +498,29 @@ button {
 		            }
 		        }
 		$(function () {
-		  $('#emailLink').on('click', function (event) {
-		      event.preventDefault();
-		    alert("Preparazione Mail");
-		    var email = 'inidrizzo@gmail.com';
-		    var subject = 'Podcast: '+ varTitleOk;
-		    var emailBody = $('#audio-track').attr('src');
-		    //alert($('#audio-track').attr('src'));
-		    window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
-		  });
+			$('#emailLink').on('click', function (event) {
+				event.preventDefault();
+				alert("Preparazione Mail");
+				var email = 'inidrizzo@gmail.com';
+				var subject = 'Podcast: '+ varTitleOk;
+				var emailBody = $('#audio-track').attr('src');
+				//alert($('#audio-track').attr('src'));
+				if (isEmail($('#mailInput').val())) {
+					window.location = 'mailto:' + email + '?subject=' + subject + '&body=' +   emailBody;
+				} else {alert("Inserisci un indirizzo email valido.");}
+			});
 		});
 		$(function () {
-		  $('#emailLinkG').on('click', function (event) {
-		      event.preventDefault();
-		    var email = 'indirizzo@gmail.com';
-		    var subject = 'Podcast: '+ varTitleOk;
-		    var emailBody = $('#audio-track').attr('src');
-		    //alert($('#audio-track').attr('src'));
-		    //window.location = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + emailBody;
-		    let url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=' + email + '&su=' + subject + '&body=' + emailBody + '&ui=2&tf=1&pli=1';
-		    window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
-		  });
+			$('#emailLinkG').on('click', function (event) {
+		  		event.preventDefault();
+				var email = emailAddress;
+				var subject = 'Podcast: '+ varTitleOk;
+				var emailBody = $('#audio-track').attr('src');
+				//alert($('#audio-track').attr('src'));
+				if (isEmail($('#mailInput').val())) {
+				  	window.location = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + emailBody;
+				} else {alert("Inserisci un indirizzo email valido.");}
+			});
 		});
 	
 		</script>

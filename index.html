@@ -501,7 +501,9 @@ button {
 		    var subject = 'Podcast: '+ varTitleOk;
 		    var emailBody = $('#audio-track').attr('src');
 		    //alert($('#audio-track').attr('src'));
-		    window.location = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=<a href="' + emailBody + '" target="_blank">Link Episodio</a>';
+		    //window.location = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + email + '&su=' + subject + '&body=' + emailBody;
+		    let url = 'https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=' + email + '&su=' + subject + '&body=' + emailBody + '&ui=2&tf=1&pli=1';
+		    window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
 		  });
 		});
 	</script>

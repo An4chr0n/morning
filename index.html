@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrattore dei Podcast</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
-    * {
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estrattore dei Podcast</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -296,59 +296,71 @@ button {
   transition: 180ms box-shadow ease-in-out;
 }
 #inputDiv { padding-bottom : 10px; }
-    </style>
-</head>
-<body>
-  <div id="v-player">
-<audio id="audio-track" src="" type="audio/mpeg" preload="metadata">
-</audio>
-  <div id="div_1" style="display:none"></div>
-  <div id="inputDiv">
-    <input type="text" size="35" id="urlInput" placeholder="Inserisci URL" style="margin-left:5px;">
-    <button id="btnEstrai" onclick="extractTagSrc()">Estrai</button>
-    <a href="https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc" target="_blank">
-	<img src="https://lh3.googleusercontent.com/MUxpHBm6Fg_X5OQGXkYZh8tFZ9lf7-2Pd0LTF9GLbNXhSxUySdVygnzEEyAljINEqvP0phWdrtF0cTQJo7EIlhN9aA=s60" width="25" height="25" valign="bottom" align="right" style="margin-right:5px;">
-    </a>
-  </div>
-  <div id="podcast-player">
-    <div class="epidode-header">
-       <p>Estrattore dei Podcast</p>
-      	<div align:right;">
-       		<a class="episode-download" href="#" id="emailLinkG" name="emailLinkG"><i class="fa-brands fa-google"></i></a>
-      		<a class="episode-download" href="#" id="emailLink" name="emailLink"><i class="fa-regular fa-envelope" style="margin-left:20px;"></i></a>
-      		<a class="episode-download" name="copy_pre" href="#" id="div_1"><i class="fa-regular fa-copy" style="margin-left:20px;"></i></a>
-      </div>
-    </div>
-    <h3 class="episode-title" id="txtTitle"></h3>
-    <div class="wave">
-      <svg  xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 299 35">
-<linearGradient id="PSgrad_0" x1="70.711%" x2="0%" y1="70.711%" y2="0%">
-  <stop offset="0%" stop-color="rgb(253, 181, 21)" stop-opacity="1" />
-  <stop offset="100%" stop-color="rgb(251, 245, 236)" stop-opacity="1" />
-</linearGradient>
-<path fill="url(#PSgrad_0)"/>
-    </div>
-    <div id="controls">
-      <div class="first-part">
-        <div id="prev-15"><i class="fa fa-solid fa-rotate-left fa-2xl"></i></div>
-      <i id="play" class="fas fa-play"></i>
-      <i id="pause" class="fas fa-pause"></i>
-      <div id="next-30"><i class="fa fa-solid fa-flip-horizontal fa-rotate-left fa-2xl"></i></div>
-      </div>
-      <div class="second-part">
-      <div class="time current"></div>
-      <div class="progress-bar">
-      <div class="default-bar"></div>
-      <div class="fill-bar"></div>
-      <input type="range" id="seek" value="0" min="0" max=""/>
-      </div>
-      <div class="time till-end"></div>
-      <div id="speed" data-speed="1">1x</div>
-      </div>
-    </div>
-  </div>
-</div>
-	<script>
+    
+		</style>
+	</head>
+	<body>
+		<div id="v-player">
+			<audio id="audio-track" src="" type="audio/mpeg" preload="metadata">
+			</audio>
+			<div id="div_1" style="display:none"></div>
+			<div id="inputDiv">
+				<input type="text" size="35" id="urlInput" placeholder="Inserisci URL" style="margin-left:5px;">
+				<button id="btnEstrai" onclick="extractTagSrc()">Estrai</button>
+				<a href="https://chromewebstore.google.com/detail/moesif-origincors-changer/digfbfaphojjndkpccljibejjbppifbc" target="_blank">
+					<img src="https://lh3.googleusercontent.com/MUxpHBm6Fg_X5OQGXkYZh8tFZ9lf7-2Pd0LTF9GLbNXhSxUySdVygnzEEyAljINEqvP0phWdrtF0cTQJo7EIlhN9aA=s60" width="25" height="25" valign="bottom" align="right" style="margin-right:5px;">
+				</a>
+			</div>
+			<div id="podcast-player">
+				<div class="epidode-header">
+					<p>Estrattore dei Podcast</p>
+					<div align:right;"="">
+						<a class="episode-download" href="#" id="emailLinkG" name="emailLinkG">
+							<i class="fa-brands fa-google"></i>
+						</a>
+						<a class="episode-download" href="#" id="emailLink" name="emailLink">
+							<i class="fa-regular fa-envelope" style="margin-left:20px;"></i>
+						</a>
+						<a class="episode-download" name="copy_pre" href="#" id="div_1">
+							<i class="fa-regular fa-copy" style="margin-left:20px;"></i>
+						</a>
+					</div>
+				</div>
+				<h3 class="episode-title" id="txtTitle"></h3>
+				<div class="wave">
+					<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 299 35">
+						<linearGradient id="PSgrad_0" x1="70.711%" x2="0%" y1="70.711%" y2="0%">
+							<stop offset="0%" stop-color="rgb(253, 181, 21)" stop-opacity="1"></stop>
+							<stop offset="100%" stop-color="rgb(251, 245, 236)" stop-opacity="1"></stop>
+						</linearGradient>
+						<path fill="url(#PSgrad_0)"></path>
+					</svg>
+				</div>
+				<div id="controls">
+					<div class="first-part">
+						<div id="prev-15">
+							<i class="fa fa-solid fa-rotate-left fa-2xl"></i>
+						</div>
+						<i id="play" class="fas fa-play"></i>
+						<i id="pause" class="fas fa-pause"></i>
+						<div id="next-30">
+							<i class="fa fa-solid fa-flip-horizontal fa-rotate-left fa-2xl"></i>
+						</div>
+					</div>
+					<div class="second-part">
+						<div class="time current"></div>
+						<div class="progress-bar">
+							<div class="default-bar"></div>
+							<div class="fill-bar"></div>
+							<input type="range" id="seek" value="0" min="0" max="">
+						</div>
+						<div class="time till-end"></div>
+						<div id="speed" data-speed="1">1x</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
 		var audioTrack = document.getElementById("audio-track");
 		var playButton = $("#play");
 		var pauseButton = $("#pause");
@@ -506,6 +518,7 @@ button {
 		    window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
 		  });
 		});
-	</script>
-</body>
+	
+		</script>
+	</body>
 </html>
